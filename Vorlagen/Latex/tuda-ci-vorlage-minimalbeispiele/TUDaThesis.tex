@@ -1,0 +1,142 @@
+\documentclass[
+	ngerman,
+	ruledheaders=section,%Ebene bis zu der die Überschriften mit Linien abgetrennt werden, vgl. DEMO-TUDaPub
+	class=report,% Basisdokumentenklasse. Wählt die Korrespondierende KOMA-Script Klasse
+	thesis={type=Projektseminararbeit},% Dokumententyp Thesis
+	accentcolor=2c, % Akzentfarbe FG rtm
+	custommargins=false,
+	marginpar=false,
+	BCOR=10mm, % Bindekorrektur (etwas größere mittlere Ränder)
+	parskip=half-, % Absatzkennzeichnung durch Abstand vgl. KOMA-Sript
+	fontsize=11pt, % Basisschriftgröße laut Corporate Design ist mit 9pt häufig zu klein
+  	twoside,
+  	numbers=noendperiod,
+  	fleqn,
+  	captions=oneline, % Einzeilige Captions zentrieren
+  	IMRAD=false,
+]{tudapub}
+
+
+% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[utf8]{inputenc}%kompatibilität mit TeX Versionen vor April 2018
+\fi
+
+%%%%%%%%%%%%%%%%%%%
+% Mathe-Umgebungen und Symbole
+%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+
+%%%%%%%%%%%%%%%%%%%
+% TikZ für Blockschaltbilder und Skizzen
+%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}				% Zum Erzeugen von Bildern mit TikZ
+\input{Bilder/TikZ_BSBnormal.tex} % rtm-eigene Bibliothek für Blockschaltbilder
+
+%%%%%%%%%%%%%%%%%%%
+% Plotten direkt in LaTeX
+%%%%%%%%%%%%%%%%%%%
+\usepackage{pgfplots}
+
+%%%%%%%%%%%%%%%%%%%
+%Sprachanpassung & Verbesserte Trennregeln
+%%%%%%%%%%%%%%%%%%%
+\usepackage[english, main=ngerman]{babel}
+\usepackage[autostyle]{csquotes}% Anführungszeichen vereinfacht
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%%
+%Literaturverzeichnis
+%%%%%%%%%%%%%%%%%%%
+\catcode30=12  % Workaround for current biblatex problem (https://tex.stackexchange.com/questions/564990/error-after-miktex-reinstall-text-line-contains-an-invalid-character)
+\usepackage[backend=biber,style=ieee,bibencoding=utf8]{biblatex}
+\addbibresource{literature.bib}
+
+
+\begin{document}
+
+\Metadata{	% Metadaten im erzeugten PDF/A
+	title=Eine minimale LaTeX-Vorlage für schriftliche (Abschluss-)Arbeiten am IAT,
+	author=Rudi Ratlos,
+	keywords={TU Darmstadt \sep Corporate Design \sep LaTeX},
+}
+
+\title{Eine minimale \LaTeX-Vorlage für schriftliche (Abschluss-)Arbeiten am IAT}
+\subtitle{\textmd{Studiengang Elektrotechnik und Informationstechnik}}
+\author[R. Ratlos]{Rudi Ratlos}
+\reviewer*[Erstprüfer,Betreuer]{Prof. Dr.-Ing. Ulrich Konigorski \and Wi Mi M.Sc.} % erst ab Version v3.06 (2020-10-20) des tuda-ci-Pakets möglich
+
+\department{etit}
+
+\addTitleBox{\includegraphics[width=\linewidth]{rtm_mit_schrift}}
+
+%\date{\today}
+\submissiondate{1. April 2020}
+
+\lowertitleback{
+	Technische Universität Darmstadt\\
+	Institut für Automatisierungstechnik und Mechatronik\\
+	Fachgebiet Regelungstechnik und Mechatronik\\
+	Prof. Dr.-Ing. Ulrich Konigorski\\
+}
+
+\frontmatter
+\maketitle
+
+\clearpage
+\setcounter{page}{1}
+\section*{Aufgabenstellung}
+
+	Aufgabenstellungstext vom Betreuer
+	
+ \vspace{0.5cm}
+\begin{tabular}{ll}
+	Beginn: 	& ------ \\
+	Ende: 		& ------ \\
+	Seminar: 	& ------ \\
+\end{tabular}
+\clearpage
+
+\affidavit
+	
+\section*{Kurzfassung}
+	Zusammenfassung entsprechend der Dokumentensprache. In diesem Fall Deutsch.
+\section*{Abstract}
+	Additional abstract in English.	
+
+\cleardoublepage
+
+\tableofcontents
+\cleardoublepage
+
+\mainmatter
+
+\chapter{Einführung}
+
+\section{Motivation}
+
+Inhalt Inhalt Inhalt \cite{Duden}
+
+
+\input{Inhalt/Minimalbeispiele.tex}
+
+
+% =================================================================================
+% Anhang
+% =================================================================================
+\appendix % Damit wird der Anhang begonnen. Die Kapitel werden ab jetzt mit Buchstaben nummeriert
+
+
+% =================================================================================
+% Literaturverzeichnis
+% =================================================================================
+\cleardoublepage        % Auf eine leere Seite einfügen
+\phantomsection         % Für Aufnahme ins Inhaltsverzeichnis
+\addcontentsline{toc}{chapter}{\bibname}  % In Inhaltsverzeichnis von
+                                          % Dokument und pdf aufnehmen
+\printbibliography 
+% =================================================================================
+
+	
+\end{document}
